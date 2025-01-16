@@ -37,7 +37,7 @@ const WeatherApp = () => {
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedCity(city);
-    }, 2000); // Delay of 2000ms
+    }, 2500); // Delay of 2500ms
 
     return () => {
       clearTimeout(handler); // Cleanup timeout
@@ -77,7 +77,7 @@ const WeatherApp = () => {
       }
 
       const { latitude, longitude } = latLon;
-      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode,windspeed_10m_max&timezone=auto`;
+	  const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode,windspeed_10m_max&timezone=auto`;
       const response = await axios.get(weatherUrl);
       const data = response.data;
 
@@ -155,32 +155,43 @@ const WeatherApp = () => {
   
   
   const handleCityChange = (e) => {
-    setCity(e.target.value);
+    e.preventDefault(); // Prevent the form from refreshing the page
+    setCity(e.target.city.value); // Update the city with the value from the input field
   };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
+
     <div
       style={{
         minHeight: "100vh",
         background: `url(${bgImage}) center center / cover no-repeat`,
       }}
-    >
-      <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold text-center mb-4">
-          Weather Forecast
-        </h1>
-        <div className="mb-4 text-center">
-          <input
-            type="text"
-            value={city}
-            onChange={handleCityChange}
-            placeholder="Enter city name"
-            className="p-2 border border-gray-300 rounded"
-          />
-        </div>
+    >  
+           
+           <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold text-center mb-4">Weather Forecast</h1>
+	  <p className="text-xl text-center mb-4">Enter a city in the box below:</p>
+
+	  <div className="mb-4 text-center">
+	      <input
+	        type="text"
+	        name="city"  // Add a name attribute to the input so we can reference it in the handler
+	        value={city}
+	        onChange={(e) => setCity(e.target.value)}  // Update city as the user types
+	        placeholder="Enter city name"
+	        className="p-2 border border-gray-900 rounded"
+	      />
+		  <button className="ms-2 p-2 border border-gray-300 rounded bg-white hover:bg-gray-100">
+  🔍
+</button>
+
+ </div>
+
+      <h2 className="text-xl font-bold text-center mb-4">Location: {city || "_______"}</h2>
+
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {forecast.map((day, index) => (
             <WeatherCard
