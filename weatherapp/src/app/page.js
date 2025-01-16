@@ -192,7 +192,7 @@ const WeatherApp = () => {
 
       <h2 className="text-xl font-bold text-center mb-4">Location: {city || "_______"}</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {forecast.map((day, index) => (
             <WeatherCard
               key={index}
