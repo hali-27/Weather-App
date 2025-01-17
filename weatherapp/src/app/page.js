@@ -171,9 +171,9 @@ const WeatherApp = () => {
       }}
     >  
            
-           <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold text-center mb-4">Weather Forecast</h1>
-	  <p className="text-xl text-center mb-4">Enter a city in the box below:</p>
+           <div className="container mx-auto p-4 text-center">
+      <h1 className="text-2xl font-bold text-center mb-4 bg-blue-200 inline-block">Weather Forecast</h1>
+    <div className="text-xl text-center mb-4">Enter a city in the box below:</div>
 
 	  <div className="mb-4 text-center">
 	      <input
@@ -190,7 +190,7 @@ const WeatherApp = () => {
 
  </div>
 
-      <h2 className="text-xl font-bold text-center mb-4">Location: {city || "_______"}</h2>
+      <h2 className="text-xl font-bold text-center mb-4  bg-blue-200 inline-block">Location: {city || "_______"}</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {forecast.map((day, index) => (
